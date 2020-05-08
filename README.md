@@ -5,7 +5,8 @@
 By Example
 
 - Output hints
-'''
+
+```
     $ duper 
     duper: Hint
     duper min max "printf-string" file1, file2...
@@ -35,4 +36,4 @@ By Example
     hello hello 51
     hello hello 53
     hello hello 54
-'''
+```
