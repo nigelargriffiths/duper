@@ -1,8 +1,7 @@
-
-#Duplicator: duper
+# Duplicator: duper
  - Simple program for creating data or lists or commands where you want number sequences or ranges or random text
 
-Learn By Example
+# Learn By Example
 
 
 Help information - run with no arguements
@@ -20,7 +19,7 @@ Help information - run with no arguements
 Output strings with numbers in sequence
  - Arguements  1 and 2 are the start and stop numbers inclusive
  - Arguement 3 is the C language printf strings %d is print the current number
- - Note: you can use %d up to 10 times.
+ - Note: you can use %d up to 10 times in the pritf string
 
 ```
     $ duper 50 55 "hello %d"
@@ -34,7 +33,7 @@ Output strings with numbers in sequence
 
 List of random numbers
  - Arguements 1 and 4 means generate four likes
- - Arguement @[100,200] select a random number between 100 and 200
+ - Arguement @[100,200] means select a random number between 100 and 200
 
 ```
     $ duper 1 4 "@[100,200]"
@@ -48,7 +47,7 @@ List of random numbers
 Take random lines from a file
  - Create a 10 line file as below called filed
 
-````
+```
     $ cat filed
     one
     two
@@ -87,68 +86,75 @@ Take random lines from a file
     Random number 19 is one
     Random number 20 is ten
 ```
- - Perhaps you want the lines of the faile to be randomised but only appear once
+
+Perhaps you want the lines of the file to be randomised but only appear once (unique)
 ```
-$ duper 1 10 "Random number %d is @{1}" filed 2>x
-Random number 1 is six
-Random number 2 is eight
-Random number 3 is two
-Random number 4 is four
-Random number 5 is one
-Random number 6 is ten
-Random number 7 is five
-Random number 8 is three
-Random number 9 is nine
-Random number 10 is seven
-```
-There are problems if you request more thn the number of lines in the file
-```
-$ duper 1 12 "Random number %d is @{1}" filed    
-Reading file "filed" as set 0, 10 items found
-Random number 1 is two
-Random number 2 is ten
-Random number 3 is seven
-Random number 4 is one
-Random number 5 is three
-Random number 6 is five
-Random number 7 is eight
-Random number 8 is six
-Random number 9 is four
-Random number 10 is nine
-ERROR: no items left in set 0
+    $ duper 1 10 "Random number %d is @{1}" filed 2>x
+    Random number 1 is six
+    Random number 2 is eight
+    Random number 3 is two
+    Random number 4 is four
+    Random number 5 is one
+    Random number 6 is ten
+    Random number 7 is five
+    Random number 8 is three
+    Random number 9 is nine
+    Random number 10 is seven
 ```
 
-Assuming a files full of firstnames, lastnames, streets, towns
+There are problems, if you request more than the number of lines in the file
 ```
-$ duper 1 10 "@(1) @{2}, at @[1,500] @(3), @(4)." firstnames lastnames streets towns   
-Reading file "firstnames" as set 0, 10 items found
-Reading file "lastnames" as set 1, 10 items found
-Reading file "streets" as set 2, 10 items found
-Reading file "towns" as set 3, 10 items found
-Janet Smith, at 431 Green Tree Lane, Dartford.
-Sarah Griffiths, at 313 Green Tree Lane, London.
-Elisa Boyd, at 232 Long Road, Sidcup.
-James  Giles, at 304 High Street, Gravesend.
-Jane Bonner, at 4 Worm Road, London.
-Elisa Barker, at 409 Village Bypass, London.
-Luke Wordsworth, at 64 Garden Close, Gravesend.
-Jane Carpenter, at 160 Elmers End, Sidcup.
-John Smith, at 381 Wide Cresent, Dartford.
-Sarah Jones, at 193 Wide Cresent, Dartford.
+    $ duper 1 12 "Random number %d is @{1}" filed    
+    Reading file "filed" as set 0, 10 items found
+    Random number 1 is two
+    Random number 2 is ten
+    Random number 3 is seven
+    Random number 4 is one
+    Random number 5 is three
+    Random number 6 is five
+    Random number 7 is eight
+    Random number 8 is six
+    Random number 9 is four
+    Random number 10 is nine
+    ERROR: no items left in set 0
 ```
 
-Removing the "reading ..." lines
- - Note these foru input files only have 10 lines each  = making repetition common.
+Assuming four files full of firstnames, lastnames, streets, towns
+```
+    $ duper 1 10 "@(1) @{2}, at @[1,500] @(3), @(4)." firstnames lastnames streets towns   
+    Reading file "firstnames" as set 0, 10 items found
+    Reading file "lastnames" as set 1, 10 items found
+    Reading file "streets" as set 2, 10 items found
+    Reading file "towns" as set 3, 10 items found
+    Janet Smith, at 431 Green Tree Lane, Dartford.
+    Sarah Griffiths, at 313 Green Tree Lane, London.
+    Elisa Boyd, at 232 Long Road, Sidcup.
+    James  Giles, at 304 High Street, Gravesend.
+    Jane Bonner, at 4 Worm Road, London.
+    Elisa Barker, at 409 Village Bypass, London.
+    Luke Wordsworth, at 64 Garden Close, Gravesend.
+    Jane Carpenter, at 160 Elmers End, Sidcup.
+    John Smith, at 381 Wide Cresent, Dartford.
+    Sarah Jones, at 193 Wide Cresent, Dartford.
+```
+
+ - Note these four input files only have 10 lines each  = making repetition common - like two Janes and two Sarahs
+
+Removing the "Reading ..." information lines
+- Note you get different results with every time you run duper
 
 ```
-James  Giles, at 295 Elmers End, London.
-Sarah Smith, at 125 Green Tree Lane, Hartley.
-James  Wordsworth, at 144 Garden Close, London.
-Nigel Griffiths, at 280 Main Street, Dover.
-Sally Carpenter, at 288 Wide Cresent, Sevenoaks.
-James  Barker, at 309 Elmers End, Birmingham.
-John Smith, at 124 Broad Avenue, Sevenoaks.
-William Boyd, at 500 Broad Avenue, Hartley.
-Elisa Jones, at 457 Garden Close, Dartford.
-Sally Bonner, at 269 Elmers End, London.
+    $ duper 1 10 "@(1) @{2}, at @[1,500] @(3), @(4)." firstnames lastnames streets towns 2>/dev/null
+    James  Giles, at 295 Elmers End, London.
+    Sarah Smith, at 125 Green Tree Lane, Hartley.
+    James  Wordsworth, at 144 Garden Close, London.
+    Nigel Griffiths, at 280 Main Street, Dover.
+    Sally Carpenter, at 288 Wide Cresent, Sevenoaks.
+    James  Barker, at 309 Elmers End, Birmingham.
+    John Smith, at 124 Broad Avenue, Sevenoaks.
+    William Boyd, at 500 Broad Avenue, Hartley.
+    Elisa Jones, at 457 Garden Close, Dartford.
+    Sally Bonner, at 269 Elmers End, London.
 ```
+
+Support nigelargriffiths@hotmail.com
