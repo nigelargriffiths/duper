@@ -109,12 +109,26 @@ int main(int argc, char ** argv)
 
 	if( !strcmp(argv[1],"-?") || argc < 4) {
 		printf("%s: Hint\n", argv[0]);
-		printf("%s min max \"printf-string\" file1, file2...\n", argv[0]);
-		printf("min max  = lines numbers to generate (See %%d)\n");
-		printf("\"printf-string\" %%d = current line number@[n,m] \n");
-		printf("\"printf-string\" @[n,m] random number in n to m range\n");
-		printf("\"printf-string\" @(n) random entry from filen\n");
-		printf("\"printf-string\" @{n} random entry from filen (once only)\n");
+		printf("%s min max \"C-language-printf-string\" file1, file2...\n", argv[0]);
+		printf("- min max  = how makes lines to output\n");
+		printf("- file1, file2 etc = files with answers 1 per line\n");
+		printf("- use 2>/dev/null to remove info output\n\n");
+
+		printf("\"printf-string\" details\n");
+		printf("%%d = current line number\n");
+		printf("- up to ten %%d's per line\n");
+		printf("- Example: duper 25 125 \"number %%d\"\n\n");
+
+		printf("@[n,m] = random number in range from n to m inclusive\n");
+		printf("- Example: duper 1 10 \"Random @[0,100] percent\n\n");
+
+		printf("@(1) = random entry from file1, similar for @(2) and file2, etc\n");
+		printf("- Example: duper 1 10 \"Loto number is @(1)\" possible-numbers-file\n\n");
+
+		printf("@{1} = random entry from file1 (once only), similar for @{2}, etc\n");
+		printf("- Example: duper 1 10 \"name=@{1} prize=@{2}\" names prizes\n");
+		printf("- If it runs out answer - it will complain\n");
+
 		exit(42);
 	}
 	/* save the first two arguments */
